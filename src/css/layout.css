@@ -1,0 +1,25 @@
+/* stack */
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stack > * {
+  margin-block: 0;
+}
+
+.stack * + * {
+  margin-block-start: var(--size-600, 1.5rem);
+}
+
+/* === */
+
+.wrapper {
+  padding-block: clamp(2rem, -0.1127rem + 9.0141vw, 8rem);
+  padding-inline: clamp(2rem, -0.8169rem + 12.0188vw, 10rem);
+}
+
+.flex {
+  display: flex;
+}

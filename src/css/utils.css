@@ -1,0 +1,81 @@
+/* utils */
+.font-bellefair-regular {
+  font-family: 'Bellefair', serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-barlow-condensed-regular {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-barlow-regular {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.text-size-1 {
+  font-size: var(--size-1000);
+}
+
+.text-size-3 {
+  font-size: var(--size-800);
+}
+
+.text-size-4 {
+  font-size: var(--size-650);
+}
+
+.text-size-5 {
+  font-size: var(--size-700);
+}
+
+.text-size-6 {
+  font-size: var(--size-600);
+}
+
+.text-size-9 {
+  font-size: var(--size-400);
+}
+
+.leading-xl {
+  line-height: 1.8;
+}
+
+.tracking {
+  letter-spacing: 0.15rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-color-primary {
+  color: var(--white);
+}
+
+.text-color-secondary {
+  color: var(--blue-300);
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  display: none;
+}
+
+.btn {
+  background-color: transparent;
+  border: none;
+}
+
+@media (min-width: 768px) {
+  .tracking {
+    letter-spacing: 0.25rem;
+  }
+}

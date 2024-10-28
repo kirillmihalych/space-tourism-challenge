@@ -69,7 +69,7 @@ function paddedNumber(num) {
 }
 
 .logo {
-  width: var(--size-800, 2.5rem);
+  width: clamp(2.5rem, 2.0229rem + 2.0356vw, 3rem);
 }
 
 .nav {

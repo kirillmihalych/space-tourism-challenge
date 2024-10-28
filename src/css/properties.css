@@ -7,6 +7,7 @@
   --size-650: clamp(1.125rem, 0.8169rem + 1.3146vw, 2rem);
   --size-700: clamp(1.9994rem, 1.7816rem + 0.9292vw, 2.6179rem);
   --size-800: clamp(2.8271rem, 2.3311rem + 2.1163vw, 4.2358rem);
+  --size-850: clamp(3.5rem, 2.6197rem + 3.7559vw, 6rem);
   --size-900: clamp(3.9976rem, 2.992rem + 4.2906vw, 6.8535rem);
   --size-1000: clamp(5rem, 3.5915rem + 6.0094vw, 9rem);
   /* maximun line width */

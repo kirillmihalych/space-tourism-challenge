@@ -23,7 +23,7 @@ import NavbarBasic from '../components/NavbarBasic.vue'
 .home-page {
   background-image: url(../assets/home/background-home-mobile.jpg);
   background-repeat: no-repeat;
-  background-position: top center;
+  background-position: center center;
   background-size: cover;
   background-attachment: fixed;
   height: 100vh;
@@ -76,17 +76,17 @@ import NavbarBasic from '../components/NavbarBasic.vue'
   }
 
   .home-page-grid {
-    margin-block-start: 128px;
     gap: 3rem;
   }
 }
 
-@media (min-width: 1440px) {
+@media (min-width: 1024px) {
   .home-page {
     background-image: url(../assets/home/background-home-desktop.jpg);
   }
 
   .home-page-grid {
+    margin-block-start: 128px;
     grid-template-columns: auto 1fr;
   }
 

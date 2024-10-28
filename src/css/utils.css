@@ -21,6 +21,10 @@
   font-size: var(--size-1000);
 }
 
+.text-size-2 {
+  font-size: var(--size-850);
+}
+
 .text-size-3 {
   font-size: var(--size-800);
 }
@@ -46,6 +50,10 @@
 }
 
 .tracking {
+  letter-spacing: 0.15rem;
+}
+
+.tracking-sm {
   letter-spacing: 0.15rem;
 }
 

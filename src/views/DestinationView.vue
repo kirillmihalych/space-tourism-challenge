@@ -5,34 +5,45 @@
       <h1 class="title text-size-6 tracking-sm uppercase"><span class="opacity-25">01</span>Pick Your Destination</h1>
       <div class="content-desktop-layout">
         <div class="img-wrapper">
-          <img v-if="route.hash === '#mars'" src="../assets/destination/image-mars.png" alt="mars image" />
-          <img v-else-if="route.hash === '#europa'" src="../assets/destination/image-europa.png" alt="moon image" />
-          <img v-else-if="route.hash === '#titan'" src="../assets/destination/image-titan.png" alt="mars image" />
-          <img v-else="route.hash === '#moon'" src="../assets/destination/image-moon.png" alt="moon image" />
+          <img :src="image" alt="mars image" />
         </div>
         <div class="content">
           <div class="snap-tabs stack">
-            <nav>
-              <ul class="tabs-navigation">
-                <li
-                  v-for="(destinationName, index) in destinationNames"
-                  :key="index"
-                  class="tabs__nav-item text-size-9 uppercase"
+            <ul class="tabs-navigation" role="tablist" aria-label="destination list">
+              <li
+                v-for="(destinationName, index) in destinationNames"
+                class="tabs__nav-item text-size-9 uppercase"
+                :key="index"
+                role="presentation"
+              >
+                <button
+                  ref="tabs"
+                  :id="destinationName"
+                  role="tab"
+                  :aria-controls="destinationName"
+                  :aria-selected="isAriaSelected(destinationName)"
+                  @click="doSelectTab(destinationName)"
+                  @focus="() => console.log('list is on focus')"
+                  @keydown.left="prevTab"
+                  @keydown.right="nextTab"
+                  @keydown.enter=""
+                  :tabindex="tabIndex(destinationName)"
+                  class="btn text-color-primary capitalize"
                 >
-                  <a :href="`#${destinationName.toLowerCase()}`">{{ destinationName }}</a>
-                  <span v-show="isTabSelected(destinationName.toLowerCase())" class="active"></span>
-                </li>
-              </ul>
-            </nav>
+                  {{ destinationName }}
+                </button>
+              </li>
+            </ul>
+
             <section class="snap-tabs-x">
               <article
-                v-for="(destination, index) in destinations"
-                :key="index"
+                role="tabpanel"
+                :aria-labelledby="destination.name.toLowerCase()"
                 :id="destination.name.toLowerCase()"
                 class="stack"
               >
                 <h2 class="font-bellefair-regular text-size-2 uppercase">{{ destination.name }}</h2>
-                <p class="text-size-9 leading-xl text-color-secondary">
+                <p class="description font-barlow-regular text-size-9 leading-xl text-color-secondary">
                   {{ destination.description }}
                 </p>
                 <hr />
@@ -56,21 +67,58 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import data from '../data/data.json'
+import { ref, computed, useTemplateRef } from 'vue'
 import NavbarBasic from '@/components/NavbarBasic.vue'
 
-const route = useRoute()
-
+const tabs = useTemplateRef('tabs')
+const selectedTab = ref('titan')
 const destinations = data.destinations
-const destinationNames = destinations.map((destination) => destination.name)
+const destinationNames = destinations.map((destination) => destination.name.toLowerCase())
 
-const isTabSelected = (tabName) => {
-  let hash = route.hash
-  if (!hash) {
-    hash = '#moon'
+const destination = computed(() => {
+  return destinations.find((destination) => destination.name.toLowerCase() === selectedTab.value)
+})
+
+const image = computed(() => {
+  return new URL(`../assets/destination/image-${destination.value.name.toLowerCase()}.png`, import.meta.url).href
+})
+
+const selectedTabIndex = computed(() => {
+  return destinationNames.indexOf(selectedTab.value)
+})
+
+function doSelectTab(tabName) {
+  return (selectedTab.value = tabName)
+}
+function isAriaSelected(tabName) {
+  return selectedTab.value === tabName
+}
+function tabIndex(tabName) {
+  return selectedTab.value === tabName ? '0' : '-1'
+}
+
+function prevTab() {
+  let prevItem
+  if (selectedTabIndex.value === 0) {
+    prevItem = destinationNames.length - 1
+  } else {
+    prevItem = selectedTabIndex.value - 1
   }
-  return `#${tabName}` === hash
+  selectedTab.value = destinationNames[prevItem]
+  tabs.value[prevItem].focus()
+}
+
+function nextTab() {
+  const lastIndex = destinationNames.length - 1
+  let nextItem
+  if (selectedTabIndex.value === lastIndex) {
+    nextItem = 0
+  } else {
+    nextItem = selectedTabIndex.value + 1
+  }
+  selectedTab.value = destinationNames[nextItem]
+  tabs.value[nextItem].focus()
 }
 </script>
 
@@ -139,6 +187,10 @@ const isTabSelected = (tabName) => {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 100%;
+}
+
+.description {
+  min-height: 164px;
 }
 
 dl {

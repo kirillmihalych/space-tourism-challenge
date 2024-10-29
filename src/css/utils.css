@@ -78,8 +78,13 @@
 }
 
 .btn {
+  cursor: pointer;
   background-color: transparent;
   border: none;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 @media (min-width: 768px) {

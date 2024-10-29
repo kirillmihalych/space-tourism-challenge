@@ -1,7 +1,7 @@
+import './css/properties.css'
 import './css/normalize.css'
 import './css/utils.css'
 import './css/layout.css'
-import './css/properties.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'

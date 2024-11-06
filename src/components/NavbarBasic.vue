@@ -6,21 +6,40 @@
         <img src="../assets/shared/logo.svg" alt="" class="logo" />
       </div>
       <div aria-hidden="true" class="horizontal-line"></div>
-      <ul class="nav" :class="[isLinksVisible ? 'visible-links' : 'hidden-links']" role="menubar">
+      <ul id="main-navigation" class="nav" :class="[isLinksVisible ? 'visible-links' : 'hidden-links']" role="menu">
         <li
           v-for="({ path, name }, index) in routes"
           :key="path"
+          role="none"
           class="nav-item font-barlow-condensed-regular uppercase"
           :class="[currentPath === name ? 'active-link' : '']"
-          role="menuitem"
+          ref="menuitems"
         >
-          <RouterLink :to="path"
+          <RouterLink
+            :to="path"
+            :tabindex="setTabIndex(name)"
+            role="menuitem"
+            ref="menuitem"
+            :aria-labelledby="name"
+            @keydown.right="focusNextLink"
+            @keydown.left="focusPrevLink"
+            @keydown.esc="closeMenu"
             ><span>{{ paddedNumber(index) }}</span
             >{{ name }}</RouterLink
           >
         </li>
       </ul>
-      <button class="btn" @click="doToggleMenu">
+      <button
+        ref="menubtn"
+        class="btn"
+        @click="doToggleMenu"
+        @keydown.enter="enterMenu"
+        @keydown.space="enterMenu"
+        aria-controls="main-navigation"
+        aria-label="navigation"
+        aria-haspopup="menu"
+        :aria-expanded="isLinksVisible"
+      >
         <img
           v-if="!isLinksVisible"
           src="../assets/shared/icon-hamburger.svg"
@@ -34,18 +53,72 @@
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router'
-import { ref, computed } from 'vue'
-
-const isLinksVisible = ref(false)
-const doToggleMenu = () => (isLinksVisible.value = !isLinksVisible.value)
+import { ref, computed, useTemplateRef } from 'vue'
 
 const routes = useRouter().getRoutes()
 const routePath = useRoute().path
+const isLinksVisible = ref(false)
+const focusedLink = ref('home')
+const menuBtn = useTemplateRef('menubtn')
+const menuItems = useTemplateRef('menuitems')
 
 const currentPath = computed(() => {
   const route = routes.find((route) => route.path === routePath)
   return route.name
 })
+
+const focusedLinkIndex = computed(() => {
+  return linkNameList.indexOf(focusedLink.value)
+})
+
+const linkNameList = routes.map((route) => route.name)
+
+function doToggleMenu() {
+  isLinksVisible.value = !isLinksVisible.value
+}
+
+function focusPrevLink() {
+  if (focusedLinkIndex.value === 0) {
+    return
+  } else {
+    const index = focusedLinkIndex.value - 1
+    focusedLink.value = linkNameList[index]
+    menuItems.value[index].firstChild.focus()
+  }
+}
+
+function focusNextLink() {
+  if (focusedLinkIndex.value === linkNameList.length - 1) {
+    return
+  } else {
+    const index = focusedLinkIndex.value + 1
+    focusedLink.value = linkNameList[index]
+    menuItems.value[index].firstChild.focus()
+  }
+}
+
+function closeMenu() {
+  isLinksVisible.value = false
+  menuBtn.value.focus()
+}
+
+function openMenu() {
+  isLinksVisible.value = true
+}
+
+function setFocusOnFirstLink() {
+  menuItems.value[0].firstChild.focus()
+  menuItems.value[0].firstChild.setAttribute('tabindex', '0')
+}
+
+function enterMenu() {
+  openMenu()
+  setFocusOnFirstLink()
+}
+
+function setTabIndex(name) {
+  return name === focusedLink.value ? '0' : '-1'
+}
 
 function paddedNumber(num) {
   return `0${num}`
@@ -75,6 +148,7 @@ function paddedNumber(num) {
 .nav {
   list-style: none;
   position: fixed;
+  z-index: 2;
   right: 0;
   top: 0;
   bottom: 0;
@@ -115,6 +189,7 @@ function paddedNumber(num) {
 
 .btn {
   position: relative;
+  z-index: 3;
 }
 
 .horizontal-line {

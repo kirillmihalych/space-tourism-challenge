@@ -77,6 +77,10 @@
   display: none;
 }
 
+/* .sticky {
+  position: sticky;
+} */
+
 .btn {
   cursor: pointer;
   background-color: transparent;

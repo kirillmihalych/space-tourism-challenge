@@ -23,7 +23,6 @@
                   :aria-controls="destinationName"
                   :aria-selected="isAriaSelected(destinationName)"
                   @click="doSelectTab(destinationName)"
-                  @focus="() => console.log('list is on focus')"
                   @keydown.left="prevTab"
                   @keydown.right="nextTab"
                   @keydown.enter=""
@@ -34,7 +33,6 @@
                 </button>
               </li>
             </ul>
-
             <section class="snap-tabs-x">
               <article
                 role="tabpanel"

@@ -1,62 +1,64 @@
 <template>
   <section class="destination-page">
-    <NavbarBasic />
-    <div class="stack wrapper font-barlow-condensed-regular text-center text-color-primary">
-      <h1 class="title text-size-6 tracking-sm uppercase"><span class="opacity-25">01</span>Pick Your Destination</h1>
-      <div class="content-desktop-layout">
-        <div class="img-wrapper">
-          <img :src="image" alt="mars image" />
-        </div>
-        <div class="content">
-          <div class="snap-tabs stack">
-            <ul class="tabs-navigation" role="tablist" aria-label="destination list">
-              <li
-                v-for="(destinationName, index) in destinationNames"
-                class="tabs__nav-item text-size-9 uppercase"
-                :key="index"
-                role="presentation"
-              >
-                <button
-                  ref="tabs"
-                  :id="destinationName"
-                  role="tab"
-                  :aria-controls="destinationName"
-                  :aria-selected="isAriaSelected(destinationName)"
-                  @click="doSelectTab(destinationName)"
-                  @keydown.left="prevTab"
-                  @keydown.right="nextTab"
-                  @keydown.enter=""
-                  :tabindex="tabIndex(destinationName)"
-                  class="btn text-color-primary capitalize"
+    <div class="content-wrapper">
+      <NavbarBasic />
+      <div class="stack wrapper font-barlow-condensed-regular text-center text-color-primary">
+        <h1 class="title text-size-6 tracking-sm uppercase"><span class="opacity-25">01</span>Pick Your Destination</h1>
+        <div class="content-desktop-layout">
+          <div class="img-wrapper">
+            <img :src="image" alt="mars image" />
+          </div>
+          <div class="content">
+            <div class="snap-tabs stack">
+              <ul class="tabs-navigation" role="tablist" aria-label="destination list">
+                <li
+                  v-for="(destinationName, index) in destinationNames"
+                  class="tabs__nav-item text-size-9 uppercase"
+                  :key="index"
+                  role="presentation"
                 >
-                  {{ destinationName }}
-                </button>
-              </li>
-            </ul>
-            <section class="snap-tabs-x">
-              <article
-                role="tabpanel"
-                :aria-labelledby="destination.name.toLowerCase()"
-                :id="destination.name.toLowerCase()"
-                class="stack"
-              >
-                <h2 class="font-bellefair-regular text-size-2 uppercase">{{ destination.name }}</h2>
-                <p class="description font-barlow-regular text-size-9 leading-xl text-color-secondary">
-                  {{ destination.description }}
-                </p>
-                <hr />
-                <dl class="uppercase">
-                  <div>
-                    <dt class="text-color-secondary text-size-9">Avg. destinace</dt>
-                    <dd class="font-bellefair-regular">{{ destination.distance }}</dd>
-                  </div>
-                  <div>
-                    <dt class="text-color-secondary text-size-9">Est. travel time</dt>
-                    <dd class="font-bellefair-regular">{{ destination.travel }}</dd>
-                  </div>
-                </dl>
-              </article>
-            </section>
+                  <button
+                    ref="tabs"
+                    :id="destinationName"
+                    role="tab"
+                    :aria-controls="destinationName"
+                    :aria-selected="isAriaSelected(destinationName)"
+                    @click="doSelectTab(destinationName)"
+                    @keydown.left="prevTab"
+                    @keydown.right="nextTab"
+                    @keydown.enter=""
+                    :tabindex="tabIndex(destinationName)"
+                    class="btn text-color-primary capitalize"
+                  >
+                    {{ destinationName }}
+                  </button>
+                </li>
+              </ul>
+              <section class="snap-tabs-x">
+                <article
+                  role="tabpanel"
+                  :aria-labelledby="destination.name.toLowerCase()"
+                  :id="destination.name.toLowerCase()"
+                  class="stack"
+                >
+                  <h2 class="font-bellefair-regular text-size-2 uppercase">{{ destination.name }}</h2>
+                  <p class="description font-barlow-regular text-size-9 leading-xl text-color-secondary">
+                    {{ destination.description }}
+                  </p>
+                  <hr />
+                  <dl class="uppercase">
+                    <div>
+                      <dt class="text-color-secondary text-size-9">Avg. destinace</dt>
+                      <dd class="font-bellefair-regular">{{ destination.distance }}</dd>
+                    </div>
+                    <div>
+                      <dt class="text-color-secondary text-size-9">Est. travel time</dt>
+                      <dd class="font-bellefair-regular">{{ destination.travel }}</dd>
+                    </div>
+                  </dl>
+                </article>
+              </section>
+            </div>
           </div>
         </div>
       </div>

@@ -1,16 +1,20 @@
 <template>
   <section class="home-page text-center">
-    <NavbarBasic />
-    <div class="home-page-grid wrapper">
-      <div class="home-content stack text-color-secondary">
-        <p class="font-barlow-condensed-regular text-size-6 uppercase tracking">So, you want to travel to</p>
-        <h1 class="font-bellefair-regular text-color-primary text-size-1 uppercase">Space</h1>
-        <p class="font-barlow-regular text-size-9 leading-xl">
-          Let’s face it; if you want to go to space, you might as well genuinely go to outer space and not hover kind of
-          on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!
-        </p>
+    <div class="content-wrapper">
+      <NavbarBasic />
+      <div class="home-page-grid wrapper">
+        <div class="home-content stack text-color-secondary">
+          <p class="font-barlow-condensed-regular text-size-6 uppercase tracking">So, you want to travel to</p>
+          <h1 class="font-bellefair-regular text-color-primary text-size-1 uppercase">Space</h1>
+          <p class="font-barlow-regular text-size-9 leading-xl">
+            Let’s face it; if you want to go to space, you might as well genuinely go to outer space and not hover kind
+            of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!
+          </p>
+        </div>
+        <button aria-label="explore" class="btn btn-explore font-bellefair-regular text-size-4 uppercase">
+          Explore
+        </button>
       </div>
-      <button class="btn btn-explore font-bellefair-regular text-size-4 uppercase">Explore</button>
     </div>
   </section>
 </template>

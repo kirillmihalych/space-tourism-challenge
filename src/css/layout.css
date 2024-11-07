@@ -20,6 +20,11 @@
   padding-inline: clamp(2rem, -0.8169rem + 12.0188vw, 10rem);
 }
 
+.content-wrapper {
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
 .flex {
   display: flex;
 }

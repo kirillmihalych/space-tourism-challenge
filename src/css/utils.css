@@ -29,6 +29,10 @@
   font-size: var(--size-800);
 }
 
+.text-size-3-4 {
+  font-size: clamp(1.5rem, 0.7951rem + 3.0075vw, 3.5rem);
+}
+
 .text-size-4 {
   font-size: var(--size-650);
 }
@@ -77,10 +81,6 @@
   display: none;
 }
 
-/* .sticky {
-  position: sticky;
-} */
-
 .btn {
   cursor: pointer;
   background-color: transparent;
@@ -89,6 +89,10 @@
 
 .capitalize {
   text-transform: capitalize;
+}
+
+.opacity-25 {
+  opacity: 0.25;
 }
 
 @media (min-width: 768px) {

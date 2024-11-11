@@ -12,17 +12,19 @@
             <img class="img" :src="imageLandscape" alt="" />
           </picture>
           <div class="content">
-            <div class="tabs">
+            <nav aria-labeel="pagination" class="pagination">
               <button
                 v-for="n in 3"
                 :key="n"
                 @click="selectTab(n)"
-                class="tabs__btn font-bellefair-regular"
+                class="pagination__btn font-bellefair-regular"
                 :class="[n === activeTechIndex + 1 ? 'active' : '']"
+                :aria-label="`Page ${n}`"
+                :aria-current="[n === activeTechIndex + 1 ? 'page' : 'false']"
               >
                 {{ n }}
               </button>
-            </div>
+            </nav>
             <div>
               <dl class="definition-list font-bellefair-regular uppercase text-color-primary">
                 <dt class="text-size-4 opacity-25">The Terminology...</dt>
@@ -110,14 +112,14 @@ function selectTab(index) {
   margin-block-end: 1rem;
 }
 
-.tabs {
+.pagination {
   display: flex;
   gap: 1rem;
   justify-content: center;
   margin-block: 2rem;
 }
 
-.tabs__btn {
+.pagination__btn {
   width: clamp(2.5rem, 1.6189rem + 3.7594vw, 5rem);
   height: clamp(2.5rem, 1.6189rem + 3.7594vw, 5rem);
   font-size: clamp(1.125rem, 0.8166rem + 1.3158vw, 2rem);
@@ -173,7 +175,7 @@ function selectTab(index) {
     height: 100%;
   }
 
-  .tabs {
+  .pagination {
     flex-direction: column;
   }
 

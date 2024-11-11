@@ -3,7 +3,7 @@
     <div class="content-wrapper">
       <NavbarBasic />
       <div class="crew-page__layout wrapper">
-        <div>
+        <div class="grid-container">
           <h2 class="crew-page__title"><span class="crew-page__title--number">02</span>Meet your crew</h2>
           <div class="crew-member-content">
             <dl>
@@ -14,14 +14,17 @@
               {{ crewMember.bio }}
             </p>
           </div>
-          <div class="crew-member-content__pagination">
+          <nav aria-label="pagination" class="crew-member-content__pagination">
             <button
-              class="crew-member-content__btn-pagination"
-              @click="showCrewMember(index)"
               v-for="index in crewIndexes"
               :key="index"
+              class="crew-member-content__btn-pagination"
+              @click.prevent="showCrewMember(index)"
+              :class="index - 1 === activeCrewMember ? 'crew-member-content__btn-pagination--active' : ''"
+              :aria-label="`Page ${index}`"
+              :aria-current="index - 1 === activeCrewMember ? 'page' : 'false'"
             ></button>
-          </div>
+          </nav>
         </div>
         <div class="image-wrapper">
           <img :src="image" alt="" class="crew-member-content__image" />
@@ -87,12 +90,18 @@ function showCrewMember(index) {
   opacity: 0.25;
 }
 
+.grid-container {
+  display: grid;
+  gap: 1.5rem;
+  margin-block-end: 2rem;
+}
+
 .crew-member-content {
   display: grid;
   gap: 1.5rem;
   font-family: 'Bellefair', serif;
   color: var(--white);
-  padding-block: clamp(2.5rem, 0.1232rem + 10.1408vw, 9.25rem);
+  padding-block: 2.5rem;
   margin-block-end: 0;
 }
 
@@ -113,21 +122,28 @@ function showCrewMember(index) {
   font-size: var(--size-400);
   line-height: 1.8;
   color: var(--blue-300);
-  min-height: 150px;
 }
 
 .crew-member-content__pagination {
   display: flex;
   justify-content: center;
+  list-style: none;
   gap: 1rem;
 }
 
 .crew-member-content__btn-pagination {
+  display: inline-block;
   width: clamp(0.625rem, 0.515rem + 0.4695vw, 0.9375rem);
   height: clamp(0.625rem, 0.515rem + 0.4695vw, 0.9375rem);
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  background-color: var(--white);
+  opacity: 0.5;
+}
+
+.crew-member-content__btn-pagination--active {
+  opacity: 1;
 }
 
 .image-wrapper > img {
@@ -147,7 +163,7 @@ function showCrewMember(index) {
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1440px) {
   .crew-page {
     background-image: url(../assets/crew/background-crew-desktop.jpg);
   }
@@ -160,6 +176,15 @@ function showCrewMember(index) {
 
   .crew-page__title {
     justify-content: start;
+  }
+
+  .grid-container {
+    display: grid;
+    grid-template-rows: auto minmax(auto, 550px) auto;
+  }
+
+  .crew-member-content {
+    padding-block: 180px;
   }
 
   .image-wrapper {

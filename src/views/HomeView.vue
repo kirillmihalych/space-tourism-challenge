@@ -11,16 +11,23 @@
             of on the edge of it. Well sit back, and relax because we’ll give you a truly out of this world experience!
           </p>
         </div>
-        <button aria-label="explore" class="btn btn-explore font-bellefair-regular text-size-4 uppercase">
+        <RouterLink
+          to="/destination"
+          aria-label="explore"
+          class="btn btn-explore font-bellefair-regular text-size-4 uppercase"
+        >
           Explore
-        </button>
+        </RouterLink>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
 import NavbarBasic from '../components/NavbarBasic.vue'
+
+const routes = useRouter().getRoutes()
 </script>
 
 <style scoped>
@@ -49,6 +56,10 @@ import NavbarBasic from '../components/NavbarBasic.vue'
 }
 
 .btn-explore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
   position: relative;
   z-index: 1;
   cursor: pointer;
@@ -59,6 +70,10 @@ import NavbarBasic from '../components/NavbarBasic.vue'
   border-radius: 50%;
   background-color: var(--white);
   -webkit-tap-highlight-color: transparent;
+}
+
+.btn-explore:visited {
+  color: black;
 }
 
 .btn-explore::after {

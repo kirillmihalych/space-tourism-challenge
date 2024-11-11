@@ -98,6 +98,7 @@ function showCrewMember(index) {
 
 .crew-member-content {
   display: grid;
+  place-items: center;
   gap: 1.5rem;
   font-family: 'Bellefair', serif;
   color: var(--white);
@@ -121,6 +122,7 @@ function showCrewMember(index) {
   font-family: 'Barlow', sans-serif;
   font-size: var(--size-400);
   line-height: 1.8;
+  width: max(550px);
   color: var(--blue-300);
 }
 
@@ -137,13 +139,16 @@ function showCrewMember(index) {
   height: clamp(0.625rem, 0.515rem + 0.4695vw, 0.9375rem);
   border: none;
   border-radius: 50%;
-  cursor: pointer;
   background-color: var(--white);
   opacity: 0.5;
 }
 
 .crew-member-content__btn-pagination--active {
   opacity: 1;
+}
+
+.crew-member-content__btn-pagination:hover {
+  opacity: 0.75;
 }
 
 .image-wrapper > img {
@@ -184,6 +189,7 @@ function showCrewMember(index) {
   }
 
   .crew-member-content {
+    place-items: start;
     padding-block: 180px;
   }
 

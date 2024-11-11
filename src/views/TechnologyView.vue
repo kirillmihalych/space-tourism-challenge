@@ -28,10 +28,10 @@
             <div>
               <dl class="definition-list font-bellefair-regular uppercase text-color-primary">
                 <dt class="text-size-4 opacity-25">The Terminology...</dt>
-                <dd class="text-size-3-4">{{ tech[0].name }}</dd>
+                <dd class="text-size-3-4">{{ activeTechItem.name }}</dd>
               </dl>
               <p class="content__desc font-barlow-condensed-regular">
-                {{ tech[0].description }}
+                {{ activeTechItem.description }}
               </p>
             </div>
           </div>
@@ -94,11 +94,11 @@ function selectTab(index) {
   place-items: center;
   padding-inline: clamp(2rem, -0.8169rem + 12.0188vw, 10rem);
   padding-block-end: 150px;
+  overflow: hidden;
 }
 
 .grid-container__picture {
   width: 130%;
-  overflow: hidden;
 }
 
 .img {

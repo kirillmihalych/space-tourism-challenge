@@ -28,7 +28,8 @@
                     @keydown.right="nextTab"
                     @keydown.enter=""
                     :tabindex="tabIndex(destinationName)"
-                    class="btn text-color-primary capitalize"
+                    class="btn btn__tab text-color-primary uppercase"
+                    :class="[destinationName === selectedTab ? 'btn__tab--active' : '']"
                   >
                     {{ destinationName }}
                   </button>
@@ -207,6 +208,19 @@ dt {
 
 dd {
   font-size: 1.75rem;
+}
+
+.btn__tab {
+  letter-spacing: 2px;
+  padding-block-end: 0.75rem;
+}
+
+.btn__tab--active {
+  border-block-end: 3px solid var(--white);
+}
+
+.btn__tab:hover {
+  border-block-end: 3px solid rgba(250, 250, 250, 0.25);
 }
 
 @media (min-width: 768px) {
